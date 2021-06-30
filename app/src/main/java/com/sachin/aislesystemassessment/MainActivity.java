@@ -1,9 +1,11 @@
 package com.sachin.aislesystemassessment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import dagger.hilt.android.AndroidEntryPoint;
 
 import android.os.Bundle;
 
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     @Override

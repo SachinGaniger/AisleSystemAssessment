@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">AisleSystemAssessment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="get_otp">Get OTP</string>
+    <string name="enter_phone_number">Enter Your Phone Number</string>
+    <string name="but_continue">Continue</string>
+    <string name="enter_otp">Enter the OTP</string>
+    <string name="notes">Notes</string>
+    <string name="personal_message">Personal message to you</string>
+    <string name="interested_in_you">Interested In You</string>
+    <string name="premium_member_text">Premium member can view all their likes at once</string>
+    <string name="profile_name">Meena, 23</string>
+    <string name="bt_update">Upgrade</string>
+    <string name="review_notes">Tap to review 50+ notes</string>
 </resources>
