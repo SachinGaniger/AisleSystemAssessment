@@ -1,5 +1,7 @@
 package com.sachin.aislesystemassessment.network;
 
+import com.sachin.aislesystemassessment.models.LoginResponse;
+import com.sachin.aislesystemassessment.models.OtpResponse;
 import com.sachin.aislesystemassessment.models.OtpVerify;
 import com.sachin.aislesystemassessment.models.ProfileResponse;
 import com.sachin.aislesystemassessment.models.User;
@@ -15,12 +17,13 @@ public interface ApiService {
 
     @Headers("Content-Type:application/json")
     @POST("phone_number_login")
-    Observable<String> login(@Body User user);
+    Observable<LoginResponse> login(@Body User user,
+                                    @Header("Cookie") String cookie);
 
     @Headers("Content-Type:application/json")
     @POST("verify_otp")
-    Observable<String> verifyOtp(@Body OtpVerify otpVerify,
-                                 @Header("Cookie") String cookie);
+    Observable<OtpResponse> verifyOtp(@Body OtpVerify otpVerify,
+                                      @Header("Cookie") String cookie);
 
     @GET("test_profile_list")
     Observable<ProfileResponse> getProfileList(@Header("Authorization") String token,

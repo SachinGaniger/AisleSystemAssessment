@@ -1,5 +1,7 @@
 package com.sachin.aislesystemassessment.repository;
 
+import com.sachin.aislesystemassessment.models.LoginResponse;
+import com.sachin.aislesystemassessment.models.OtpResponse;
 import com.sachin.aislesystemassessment.models.OtpVerify;
 import com.sachin.aislesystemassessment.models.ProfileResponse;
 import com.sachin.aislesystemassessment.models.User;
@@ -20,11 +22,12 @@ public class Repository {
         this.apiService = _apiService;
     }
 
-    public Observable<String> login(User user){
-        return apiService.login(user);
+    public Observable<LoginResponse> login(User user){
+        return apiService.login(user, COOKIE);
     }
 
-    public Observable<String> verifyOtpFromApi(OtpVerify otpVerify){
+
+    public Observable<OtpResponse> verifyOtpFromApi(OtpVerify otpVerify){
         return apiService.verifyOtp(otpVerify, COOKIE);
     }
 
