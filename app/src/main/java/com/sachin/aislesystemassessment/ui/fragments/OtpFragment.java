@@ -13,6 +13,7 @@ import com.sachin.aislesystemassessment.databinding.FragmentPhoneNumberBinding;
 import com.sachin.aislesystemassessment.models.OtpResponse;
 import com.sachin.aislesystemassessment.models.OtpVerify;
 import com.sachin.aislesystemassessment.ui.viewmodels.UserViewModel;
+import com.sachin.aislesystemassessment.utils.CommonUtil;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -75,6 +76,21 @@ public class OtpFragment extends Fragment {
                     navigateNext(bundle);
                 } else {
                     Toast.makeText(getActivity(), "Wrong OTP", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        userViewModel.getProgressStatus().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (getActivity() != null) {
+                    if (aBoolean != null && aBoolean) {
+                        CommonUtil.showProgressBar(requireActivity());
+
+                    } else {
+                        CommonUtil.dismissProgressDialog();
+
+                    }
                 }
             }
         });

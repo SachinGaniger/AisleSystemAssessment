@@ -14,6 +14,7 @@ import com.sachin.aislesystemassessment.models.Photo;
 import com.sachin.aislesystemassessment.models.ProfileResponse;
 import com.sachin.aislesystemassessment.ui.adapters.LikesAdapter;
 import com.sachin.aislesystemassessment.ui.viewmodels.UserViewModel;
+import com.sachin.aislesystemassessment.utils.CommonUtil;
 import com.sachin.aislesystemassessment.utils.GridSpacingItemDecoration;
 
 import java.util.List;
@@ -64,6 +65,21 @@ public class NotesFragment extends Fragment {
 
                 updateUi(profileResponse);
 
+            }
+        });
+
+        userViewModel.getProgressStatus().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (getActivity() != null) {
+                    if (aBoolean != null && aBoolean) {
+                        CommonUtil.showProgressBar(requireActivity());
+                        notesBinding.nsvNotes.setVisibility(View.INVISIBLE);
+                    } else {
+                        CommonUtil.dismissProgressDialog();
+                        notesBinding.nsvNotes.setVisibility(View.VISIBLE);
+                    }
+                }
             }
         });
 
