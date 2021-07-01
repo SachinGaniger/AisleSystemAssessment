@@ -22,10 +22,20 @@
         <action
             android:id="@+id/action_otpFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
+        <argument
+            android:name="phoneNumber"
+            app:argType="string" />
+        <argument
+            android:name="number"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/notesFragment"
         android:name="com.sachin.aislesystemassessment.ui.fragments.NotesFragment"
         android:label="fragment_notes"
-        tools:layout="@layout/fragment_notes" />
+        tools:layout="@layout/fragment_notes" >
+        <argument
+            android:name="token"
+            app:argType="string" />
+    </fragment>
 </navigation>

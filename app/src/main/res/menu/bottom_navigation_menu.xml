@@ -3,25 +3,25 @@
 
     <item
         android:id="@+id/dicover"
-        android:icon="@drawable/discover1_1"
+        android:icon="@drawable/discover1_3x"
         android:title="Discover"
         />
 
     <item
         android:id="@+id/notes"
-        android:icon="@drawable/notes1_1"
+        android:icon="@drawable/notes1_3x"
         android:title="Notes"
         />
 
     <item
         android:id="@+id/matches"
-        android:icon="@drawable/matches1_1"
+        android:icon="@drawable/matches1_3x"
         android:title="Matches"
         />
 
     <item
         android:id="@+id/profile"
-        android:icon="@drawable/profile1_1"
+        android:icon="@drawable/profile1_3x"
         android:title="Profile"
         />
 

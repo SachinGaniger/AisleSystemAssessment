@@ -8,156 +8,176 @@
     android:background="@color/white"
     tools:context=".ui.fragments.NotesFragment">
 
-    <TextView
-        android:id="@+id/tv_notes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/gilroy_extra_bold"
-        android:text="@string/notes"
-        android:textSize="22sp"
-        android:textColor="@color/black"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_notes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_personalMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/gilroy_semi_bold"
-        android:text="@string/personal_message"
-        android:textSize="16sp"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_notes" />
-    
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_profile"
-        android:layout_width="0dp"
-        android:layout_height="320dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="10dp"
-        android:layout_marginTop="10dp"
-        app:cardPreventCornerOverlap="true"
-        android:layout_marginHorizontal="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_personalMessage"
-        >
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:background="@drawable/photo_1"
-            android:scaleType="centerInside"
-            android:contentDescription="Profile Image">
-
-        </ImageView>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp"
-            android:layout_gravity="bottom"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
             >
 
-            <TextView
-                android:id="@+id/tv_nameAge"
+            <Button
+                android:id="@+id/bt_continue"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroy_extra_bold"
-                android:text="@string/profile_name"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:layout_gravity="bottom"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="43dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/round_button"
+                android:fontFamily="@font/gilroy_semi_bold"
+                android:minHeight="0dp"
+                android:paddingVertical="8dp"
+                android:text="@string/bt_update"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_premiumMember"
+                app:layout_constraintEnd_toEndOf="@+id/cv_profile" />
 
             <TextView
-                android:id="@+id/tv_reviews"
+                android:id="@+id/tv_personalMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/gilroy_semi_bold"
-                android:text="@string/review_notes"
-                android:textColor="@color/white"
+                android:text="@string/personal_message"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_notes" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextView
+                android:id="@+id/tv_interested"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/gilroy_extra_bold"
+                android:text="@string/interested_in_you"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                app:layout_constraintStart_toStartOf="@+id/cv_profile"
+                app:layout_constraintTop_toBottomOf="@+id/cv_profile" />
 
 
+            <TextView
+                android:id="@+id/tv_premiumMember"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/gilroy_semi_bold"
+                android:text="@string/premium_member_text"
+                android:textColor="@color/grey_border"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/bt_continue"
+                app:layout_constraintStart_toStartOf="@+id/tv_interested"
+                app:layout_constraintTop_toBottomOf="@+id/tv_interested" />
 
-    </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tv_notes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/gilroy_extra_bold"
+                android:text="@string/notes"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_profile"
+                android:layout_width="0dp"
+                android:layout_height="320dp"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_personalMessage">
+
+                <ImageView
+                    android:id="@+id/iv_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/photo_1"
+                    android:contentDescription="Profile Image"
+                    android:scaleType="centerCrop">
+
+                </ImageView>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_nameAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:fontFamily="@font/gilroy_extra_bold"
+                        android:text="@string/profile_name"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gilroy_semi_bold"
+                        android:text="@string/review_notes"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_notes" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
 
+            </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/tv_interested"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/gilroy_extra_bold"
-        android:text="@string/interested_in_you"
-        android:textColor="@color/black"
-        android:layout_marginStart="12dp"
-        android:textSize="21sp"
-        app:layout_constraintStart_toStartOf="@+id/cv_profile"
-        app:layout_constraintTop_toBottomOf="@+id/cv_profile" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_likesProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_premiumMember" />
 
-    <TextView
-        android:id="@+id/tv_premiumMember"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/gilroy_semi_bold"
-        android:layout_marginEnd="18dp"
-        android:text="@string/premium_member_text"
-        android:textColor="@color/grey_border"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/bt_continue"
-        app:layout_constraintStart_toStartOf="@+id/tv_interested"
-        app:layout_constraintTop_toBottomOf="@+id/tv_interested" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/bt_continue"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/round_button"
-        android:fontFamily="@font/gilroy_semi_bold"
-        android:minHeight="0dp"
-        android:paddingVertical="8dp"
-        android:text="@string/bt_update"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_premiumMember"
-        app:layout_constraintEnd_toEndOf="@+id/cv_profile" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_likesProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_premiumMember" />
+    </androidx.core.widget.NestedScrollView>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
         android:layout_height="56dp"
-        app:menu="@menu/bottom_navigation_menu"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

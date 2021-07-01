@@ -9,10 +9,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import dagger.hilt.android.AndroidEntryPoint;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.sachin.aislesystemassessment.R;
 import com.sachin.aislesystemassessment.databinding.FragmentPhoneNumberBinding;
@@ -27,7 +30,8 @@ public class PhoneNumberFragment extends Fragment {
     FragmentPhoneNumberBinding phoneNumberBinding;
     NavController navController;
     UserViewModel userViewModel;
-    String phoneNumber;
+    String phoneNumber, number;
+    Bundle bundle;
     private static final String TAG = "PhoneNumberFragment";
 
     @Override
@@ -40,26 +44,25 @@ public class PhoneNumberFragment extends Fragment {
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
-//        phoneNumberBinding.etPhoneNumber.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                phoneNumberBinding.etPhoneNumber.getText().toString();
-//            }
-//        });
-
-        phoneNumber = phoneNumberBinding.etCountryCode.getText().toString() + phoneNumberBinding.etPhoneNumber.getText().toString();
-
-        Log.i(TAG, "onCreateView: "+ phoneNumber);
-
-        userViewModel.getNumberStatusFromRepo(new User(phoneNumber));
-
-
+        bundle = new Bundle();
 
         phoneNumberBinding.btContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i(TAG, "navigateToNext: Clicked" );
-                observeData();
+                Log.i(TAG, "navigateToNext: Clicked" +phoneNumberBinding.etPhoneNumber.toString());
+                if (!phoneNumberBinding.etPhoneNumber.getText().toString().isEmpty() && phoneNumberBinding.etPhoneNumber.getText().toString()!= null) {
+                    number = phoneNumberBinding.etCountryCode.getText().toString() + phoneNumberBinding.etPhoneNumber.getText().toString();
+                    phoneNumber = phoneNumberBinding.etCountryCode.getText().toString() + " " + phoneNumberBinding.etPhoneNumber.getText().toString();
+
+                    Log.i(TAG, "onCreateView: phoneNumber"+ phoneNumber);
+                    Log.i(TAG, "onCreateView: number"+ number);
+                    userViewModel.getNumberStatusFromRepo(new User(number));
+
+                    observeData(view);
+                } else {
+                    Toast.makeText(getActivity(), "Please Enter the Phone Number", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
@@ -67,16 +70,20 @@ public class PhoneNumberFragment extends Fragment {
         return phoneNumberBinding.getRoot();
     }
 
-    private void observeData() {
+    private void observeData(View view) {
 
         userViewModel.getNumberStatus().observe(getViewLifecycleOwner(), new Observer<LoginResponse>() {
             @Override
             public void onChanged(LoginResponse response) {
 
                 if (response.getStatus()){
-                    navigateToNext();
+
+                    bundle.putString("phoneNumber", phoneNumber);
+                    bundle.putString("number", number);
+                    navigateToNext(view);
                 } else {
                     Log.i(TAG, "status is false");
+                    Toast.makeText(getActivity(), "Please Enter the Correct Phone Number", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -98,8 +105,9 @@ public class PhoneNumberFragment extends Fragment {
 
     }
 
-    private void navigateToNext() {
+    private void navigateToNext(View view) {
         Log.i(TAG, "navigateToNext: Clicked.." );
-        navController.navigate(R.id.action_phoneNumberFragment_to_otpFragment);
+//        navController.navigate(R.id.action_phoneNumberFragment_to_otpFragment, bundle);
+        Navigation.findNavController(view).navigate(R.id.action_phoneNumberFragment_to_otpFragment, bundle);
     }
 }

@@ -1,7 +1,6 @@
 package com.sachin.aislesystemassessment.ui.viewmodels;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.sachin.aislesystemassessment.models.LoginResponse;
 import com.sachin.aislesystemassessment.models.OtpResponse;
 import com.sachin.aislesystemassessment.models.OtpVerify;
+import com.sachin.aislesystemassessment.models.ProfileResponse;
 import com.sachin.aislesystemassessment.models.User;
 import com.sachin.aislesystemassessment.repository.Repository;
 
@@ -27,6 +27,7 @@ public class UserViewModel extends ViewModel {
     private Repository repository;
     private MutableLiveData<LoginResponse> numberStatus = new MutableLiveData<>();
     private MutableLiveData<OtpResponse> token = new MutableLiveData<>();
+    private MutableLiveData<ProfileResponse> profile = new MutableLiveData<>();
     private static final String TAG = "UserViewModel";
     MutableLiveData<Boolean> showProgress = new MutableLiveData<>();
 
@@ -49,6 +50,10 @@ public class UserViewModel extends ViewModel {
 
     public LiveData<OtpResponse> getToken(){
         return token;
+    }
+
+    public LiveData<ProfileResponse> getProfile(){
+        return profile;
     }
 
     public void getNumberStatusFromRepo(User user){
@@ -81,7 +86,26 @@ public class UserViewModel extends ViewModel {
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(otpResponse -> {
+                    showProgress.postValue(false);
                     token.postValue(otpResponse);
+                }, error ->{
+                    Log.i(TAG, "getTokenFromRepo: " + error.getMessage());
+                    showProgress.postValue(false);
+                })
+        );
+
+    }
+
+    public void getProfileFromRepository(String token){
+
+        showProgress.postValue(true);
+
+        disposable.add(repository.getProfileFromApi(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(profileResponse -> {
+                    showProgress.postValue(false);
+                    profile.postValue(profileResponse);
                 }, error ->{
                     Log.i(TAG, "getTokenFromRepo: " + error.getMessage());
                     showProgress.postValue(false);
