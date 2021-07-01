@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.sachin.aislesystemassessment.models.LoginResponse;
 import com.sachin.aislesystemassessment.models.OtpResponse;
+import com.sachin.aislesystemassessment.models.OtpVerify;
 import com.sachin.aislesystemassessment.models.User;
 import com.sachin.aislesystemassessment.repository.Repository;
 
@@ -70,5 +71,22 @@ public class UserViewModel extends ViewModel {
 
     public LiveData<Boolean> getProgressStatus(){
         return showProgress;
+    }
+
+    public void getTokenFromRepo(OtpVerify otpVerify){
+
+        showProgress.postValue(true);
+
+        disposable.add(repository.verifyOtpFromApi(otpVerify)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(otpResponse -> {
+                    token.postValue(otpResponse);
+                }, error ->{
+                    Log.i(TAG, "getTokenFromRepo: " + error.getMessage());
+                    showProgress.postValue(false);
+                })
+        );
+
     }
 }
