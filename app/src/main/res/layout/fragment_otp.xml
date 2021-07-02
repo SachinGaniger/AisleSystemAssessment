@@ -82,6 +82,16 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_number"
+        app:layout_constraintStart_toEndOf="@+id/tv_number"
+        app:layout_constraintTop_toTopOf="@+id/tv_number"
+        app:srcCompat="@drawable/ic_baseline_edit_24"
+        app:tint="@color/black" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
