@@ -40,6 +40,8 @@ public class PhoneNumberFragment extends Fragment {
 
         phoneNumberBinding = FragmentPhoneNumberBinding.inflate(inflater, container, false);
 
+        CommonUtil.dismissProgressDialog();
+
         navController = Navigation.findNavController(getActivity(), R.id.navHostFragment);
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);

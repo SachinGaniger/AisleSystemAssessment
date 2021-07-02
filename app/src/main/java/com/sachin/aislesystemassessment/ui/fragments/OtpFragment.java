@@ -1,6 +1,7 @@
 package com.sachin.aislesystemassessment.ui.fragments;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,8 @@ public class OtpFragment extends Fragment {
                              Bundle savedInstanceState) {
         otpBinding = FragmentOtpBinding.inflate(inflater, container, false);
 
+        CommonUtil.dismissProgressDialog();
+
         navController = Navigation.findNavController(getActivity(), R.id.navHostFragment);
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
@@ -47,6 +50,17 @@ public class OtpFragment extends Fragment {
         otpBinding.tvNumber.setText(OtpFragmentArgs.fromBundle(getArguments()).getPhoneNumber());
 
         String number = OtpFragmentArgs.fromBundle(getArguments()).getNumber();
+
+        new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                otpBinding.tvCountdown.setText(""+millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                otpBinding.tvCountdown.setText("Resend Otp");
+            }
+        }.start();
 
 
         otpBinding.btContinue.setOnClickListener(new View.OnClickListener() {
